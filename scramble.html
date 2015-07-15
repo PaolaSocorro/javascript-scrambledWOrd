@@ -18,16 +18,34 @@
             return Math.floor(Math.random() * (max-min))+min;
         }
 
+        function wordScrambler(string){
+            var splitString = string.split("");
+            var lengthString = splitString.length;
+
+            for (var i = lengthString - 1; i > 0; i--){
+                var randIndex2 = randInt(0,i + 1);
+                var tmp = splitString[i];
+                var splitString[i] = splitString[randIndex2];
+                var splitString[randIndex2] = tmp;
+
+            return splitString.join("");
+            }
+        }
+
         while (playing) {
 
             var randIndex = randInt(min,max);
             // Grab a random word from the WORDS array
             var randWord = WORDS[randIndex];
             // Grab the corresponding scrambled word from the SCRAMBLED array
-            var scramWord = SCRAMBLED[randIndex];
+            // var scramWord = SCRAMBLED[randIndex];
+            var scramWord = wordScrambler(randWord);
             alert("HERE IS THE SCRAMBLED WORD: " + scramWord);
             // prompt the user to guess the original word when given the scrambled word
-            var userGuess = prompt("Guess the original word.");
+            var userGuess = (prompt("Guess the original word.")).trim();
+            userGuess = userGuess.toLowerCase();
+
+            // userGuess = userGuess.trim();
             // If the user guesses wrong, tell them they were wrong and the right word.
             if (userGuess === randWord){
                 alert("Good JOb you. YOu win!");
@@ -41,7 +59,7 @@
 
             // What does confirm() return?
             // What does setting the playing variable do?
-        }
+        };
 
         alert("goodbye!");
     </script>
